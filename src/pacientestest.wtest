@@ -1,11 +1,12 @@
 import pacientes.*
+import centro.*
 
 describe "Test de pacientes"{
 	const leonardo = new Paciente(edad = 40, nivelDeDolor = 10, fortalezaMuscular = 20)
 	const milena = new Paciente(edad = 3, nivelDeDolor = 30, fortalezaMuscular = 50)
-	const m = new Magneto()
-	const b = new Bicicleta()
-	const mi = new Minitramp()
+	const m = new Magneto(color = "blanco")
+	const b = new Bicicleta(color = "blanco")
+	const mi = new Minitramp(color = "blanco")
 	
 	test"Leonardo puede usar los tres aparatos creados"{
 		assert.equals(true, leonardo.puedeUsarElAparato(m) and
@@ -38,3 +39,66 @@ describe "Test de pacientes"{
 		assert.equals(24, leonardo.fortalezaMuscular())
 	}
 }
+
+describe "Test de paciente especiales"{
+	const nicolas = new PacienteResistente(
+		edad = 40,
+		nivelDeDolor = 10,
+		fortalezaMuscular = 20
+	)
+	const victoria = new PacienteCaprichoso(
+		edad = 30,
+		nivelDeDolor = 10,
+		fortalezaMuscular = 40
+	)
+	const julian = new PacienteCaprichoso(
+		edad = 20,
+		nivelDeDolor = 54, 
+		fortalezaMuscular = 50
+	)
+	const zoe = new PacienteRecuperado(
+		edad = 50,
+		nivelDeDolor = 14,
+		fortalezaMuscular = 40
+	)
+	const m = new Magneto(color = "blanco")
+	const b = new Bicicleta(color = "blanco")
+	const mi = new Minitramp(color = "blanco")
+	
+	const rutinaL = [
+		new Bicicleta(color = "blanco"),
+		new Minitramp(color = "blanco"),
+		new Bicicleta(color = "blanco"),
+		new Magneto(color = "blanco")
+	]
+	const rutinaV = []
+	
+	test"Nicolas puede hacer la rutina asignada"{
+		assert.equals(true, nicolas.puedeHacerLaRutina(rutinaL))
+	}
+	test"El dolor de nicolas haciendo rutina es de 1.8"{
+		nicolas.irAlCentro()
+		assert.equals(1.8, nicolas.nivelDeDolor())
+	}
+	test"La fortaleza de nicolas haciendo rutina es de 34"{
+		nicolas.irAlCentro()
+		assert.equals(34, nicolas.fortalezaMuscular())
+	}
+	test"Victoria no puede hacer la rutina"{
+		assert.equals(false, victoria.puedeHacerLaRutina(rutinaL))
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
