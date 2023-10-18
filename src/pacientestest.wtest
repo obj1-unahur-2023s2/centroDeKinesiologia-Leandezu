@@ -1,0 +1,40 @@
+import pacientes.*
+
+describe "Test de pacientes"{
+	const leonardo = new Paciente(edad = 40, nivelDeDolor = 10, fortalezaMuscular = 20)
+	const milena = new Paciente(edad = 3, nivelDeDolor = 30, fortalezaMuscular = 50)
+	const m = new Magneto()
+	const b = new Bicicleta()
+	const mi = new Minitramp()
+	
+	test"Leonardo puede usar los tres aparatos creados"{
+		assert.equals(true, leonardo.puedeUsarElAparato(m) and
+							leonardo.puedeUsarElAparato(b) and
+							leonardo.puedeUsarElAparato(mi))
+	}
+	test"Milena solo puede usar a Magneto"{
+		assert.equals(true, milena.puedeUsarElAparato(m) and
+							not milena.puedeUsarElAparato(b) and
+							not milena.puedeUsarElAparato(mi))
+	}
+	test"El dolor de leonardo es 9 usando magneto"{
+		leonardo.usarAparato(m)
+		assert.equals(9, leonardo.nivelDeDolor())
+	}
+	test"El dolor de milena es 27 usando magneto"{
+		milena.usarAparato(m)
+		assert.equals(27, milena.nivelDeDolor())
+	}
+	test"El dolor de leonardo es 6 usando bicicleta"{
+		leonardo.usarAparato(b)
+		assert.equals(6, leonardo.nivelDeDolor())
+	}
+	test"La fortaleza de leonardo es 23 usando bicicleta"{
+		leonardo.usarAparato(b)
+		assert.equals(23, leonardo.fortalezaMuscular())
+	}
+	test"La fortaleza de leonardo es 24 usando Minitramp"{
+		leonardo.usarAparato(mi)
+		assert.equals(24, leonardo.fortalezaMuscular())
+	}
+}
