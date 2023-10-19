@@ -1,5 +1,6 @@
 import pacientes.*
 import centro.*
+import aparatos.*
 
 describe "Test de pacientes"{
 	const leonardo = new Paciente(edad = 40, nivelDeDolor = 10, fortalezaMuscular = 20)
@@ -61,31 +62,49 @@ describe "Test de paciente especiales"{
 		nivelDeDolor = 14,
 		fortalezaMuscular = 40
 	)
-	const m = new Magneto(color = "blanco")
-	const b = new Bicicleta(color = "blanco")
-	const mi = new Minitramp(color = "blanco")
+	const magb = new Magneto(color = "blanco")
+	const bib = new Bicicleta(color = "blanco")
+	const mib = new Minitramp(color = "blanco")
+	const bir = new Bicicleta(color = "rojo")
+	const magv = new Magneto(color = "verde")
 	
-	const rutinaL = [
-		new Bicicleta(color = "blanco"),
-		new Minitramp(color = "blanco"),
-		new Bicicleta(color = "blanco"),
-		new Magneto(color = "blanco")
-	]
-	const rutinaV = []
+	const rutinaL = [bib, mib, bib, magb]
+	const rutinaV = [bir, magv, bib]
+	
+	method initialize(){
+		nicolas.asignarRutina(rutinaL)
+		victoria.asignarRutina(rutinaL)
+		julian.asignarRutina(rutinaV)
+		zoe.asignarRutina(rutinaL)
+	}
 	
 	test"Nicolas puede hacer la rutina asignada"{
-		assert.equals(true, nicolas.puedeHacerLaRutina(rutinaL))
+		assert.equals(true, nicolas.puedeHacerLaRutina())
 	}
-	test"El dolor de nicolas haciendo rutina es de 1.8"{
-		nicolas.irAlCentro()
-		assert.equals(1.8, nicolas.nivelDeDolor())
-	}
-	test"La fortaleza de nicolas haciendo rutina es de 34"{
-		nicolas.irAlCentro()
-		assert.equals(34, nicolas.fortalezaMuscular())
+	test"El dolor de nicolas haciendo rutina es de 1.8 y fortaleza 34"{
+		nicolas.tomarRutina()
+		assert.equals(true, nicolas.nivelDeDolor() == 1.8 and
+							nicolas.fortalezaMuscular() == 34)
 	}
 	test"Victoria no puede hacer la rutina"{
-		assert.equals(false, victoria.puedeHacerLaRutina(rutinaL))
+		assert.equals(false, victoria.puedeHacerLaRutina())
+	}
+	test"Julian puede hacer la rutina asignada"{
+		assert.equals(true, julian.puedeHacerLaRutina())
+	}
+	test"El dolor de julian haciendo rutina es 29.3 y fortaleza 62"{
+		julian.tomarRutina()
+		assert.equals(true, julian.nivelDeDolor() == 29.3 and
+							julian.fortalezaMuscular() == 62)
+	}
+	test"Zoe puede hacer la rutina asignada"{
+		assert.equals(true, zoe.puedeHacerLaRutina())
+	}
+	test"El dolor de zoe haciendo rutina y decremento 2 es 3.4 y fortaleza 51"{
+		zoe.recuperacion(2)
+		zoe.tomarRutina()
+		assert.equals(true, zoe.nivelDeDolor() == 3.4 and
+							zoe.fortalezaMuscular() == 51)
 	}
 }
 
